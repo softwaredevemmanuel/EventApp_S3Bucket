@@ -1,0 +1,52 @@
+
+{%extends 'home.html' %}
+
+
+{%block carousel%}
+
+{% load static %}
+
+<script src="{% static 'js/plugins.js' %}"></script>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Slides -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="d-flex justify-content-center">
+                <img src="{% static 'images/hero6.avif'%}" alt="Slide 1" class="carousel-image">
+            </div>
+          
+        </div>
+        <div class="carousel-item">
+            <div class="d-flex justify-content-center">
+                <img src="{% static 'images/hero4.avif'%}" alt="Slide 2" class="carousel-image">
+            </div>
+            
+        </div>
+        <div class="carousel-item">
+            <div class="d-flex justify-content-center">
+                <img src="{% static 'images/hero5.avif'%}" alt="Slide 3" class="carousel-image">
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only" style="color: #009999;">Next</span>
+    </a>
+</div>
+<marquee direction = "left"><h5 style="color:black;">Go to the About Page to Know more about this Application</h5></marquee>
+
+{%endblock%}

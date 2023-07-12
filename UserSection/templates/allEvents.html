@@ -1,0 +1,104 @@
+{%extends 'carousel.html' %}
+
+
+{%block allEvents%}
+
+{% load static %}
+
+<div class="container-fluid tm-container-content tm-mt-60">
+    <div class="row mb-4">
+        <h2 class="col-6 tm-text-primary">
+            Latest Events
+        </h2>
+        <div class="col-6 d-flex justify-content-end align-items-center">
+            <div class="tm-text-pagination mr-8 ">
+                Page 
+                {% for i in paginator.page_range %}
+                    {% if page_obj.number == i %}
+                    {{i}}
+                    of {{ page_obj.paginator.num_pages }}
+                {%endif%}
+                {%endfor%}
+
+            </div>
+        </div>
+    </div>
+    <div class="row tm-mb-90 tm-gallery">
+   
+
+        {% for event in object_list %}
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="{{event.header_images.url}}" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center">
+                        <h2>{{event.event_name}}</h2>
+                        <a href="{%url 'free_event_details_page' event.pk%}">View more</a>
+                    </figcaption>
+                    {%if event.price%}
+                    <div class="box-text">Paid</div>
+                    {%else%}
+                    <div class="box-text">Free</div>
+                    {%endif%}
+
+                </figure>
+
+                <div class="d-flex justify-content-between tm-text-gray bordered-box">
+                    <span class="tm-text-gray">{{event.event_name}}</span>
+                    <div class="costs">
+                        <span>Date, {{event.event_date}}</span>
+                        <span>Time {{event.event_time}}</span>
+                    </div>
+                </div>
+            </div>
+    
+        {%endfor%}
+
+    </div> 
+   
+
+    
+
+    <!-- Pagination -->
+    <div class="row tm-mb-90">
+        <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
+             {% if is_paginated %}
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary tm-btn-prev mb-2">Previous</a>
+                {% else %}
+                    <a href="javascript:void(0);" class="btn btn-primary tm-btn-prev mb-2 disabled">Previous</a>
+
+                {% endif %}
+
+                    <div class="tm-paging d-flex">
+                        {% for i in paginator.page_range %}
+                            {% if page_obj.number == i %}
+                                <a class="active tm-paging-link">{{i}}</a>
+                            {% elif i > page_obj.number|add:-3 and i < page_obj.number %}
+                                <a href="?page={{i}}" class="tm-paging-link">{{i}}</a>
+                            {%elif page_obj.has_next %}
+                                {% if page_obj.next_page_number == page_obj.paginator.num_pages %}
+                                    <a class="active tm-paging-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+                                    {%else%}
+                                    {% if i > page_obj.number and i < page_obj.number|add:3 %}
+                                        <a class="tm-paging-link" href="?page={{ i }}">{{ i }}</a>
+                                    {% endif %}
+                                {%endif%}
+                            {% endif %}
+                        {% endfor %}    
+                    </div>
+
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary tm-btn-prev mb-2 ">NextPage</a>
+                    {% else %}
+                        <a href="javascript:void(0);" class="btn btn-primary tm-btn-prev mb-2 disabled">NextPage</a>
+
+                    {% endif %}
+            {% endif %}
+
+
+        </div>
+    </div>
+</div> 
+
+{%endblock%}
+

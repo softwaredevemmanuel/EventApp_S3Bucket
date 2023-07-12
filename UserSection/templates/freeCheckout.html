@@ -1,0 +1,103 @@
+{%extends 'home.html' %}
+
+
+{%block freecheckout%}
+
+{% load static %}
+<script src="{% static 'js/plugins.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/details.css' %}">
+
+{% for message in messages %}
+<div  style="text-align: center; color:green;"><strong>{{message}}</strong></div>
+{% endfor %}
+
+
+
+<div class="container-fluid tm-container-content tm-mt-60">
+   
+    <div class="row tm-mb-90">            
+        <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12">
+            <img src="{{event.header_images.url}}" alt="Image" class="img-fluid">
+          
+        </div>
+        <div class="col-xl-6 col-lg-5 col-md-6 col-sm-12">
+            <div class="tm-bg-gray tm-video-details">
+                <div class="row mb-2">
+                    <h3 class="tm-text-gray-dark">Registration Details</h3>
+                </div>
+
+                <div class="d-flex flex-wrap">
+                    <div class="mr-4 mb-2">
+                        <span class="tm-text-gray-dark">Event: </span><span class="tm-text-primary">{{customer.event_name}}</span>
+                    </div>
+
+                </div>
+                <div class="d-flex flex-wrap">
+                    <div class="mr-4 mb-2">
+                        <span class="tm-text-gray-dark">Email: </span><span class="tm-text-primary">{{customer.email}}</span>
+                    </div>
+
+                </div>
+                <div class="mb-2 d-flex flex-wrap">
+                    <div class="mr-4 mb-2">
+                        <span class="tm-text-gray-dark">Phone Number: : </span><span class="tm-text-primary">{{customer.phone}}</span>
+                    </div>
+                </div>
+
+                <div class="test">
+                    <button id="register-btn" class="btn btn-primary tm-btn-big" onclick="handleRegisterClick()">
+                        <a href="{% url 'freebooking' customer.ref%}">Register</a>
+                    </button>
+                    
+                </div>
+                <div class="mt-4">
+
+                    <p>After a successful payment you will receive a confirmation email. Kindly show that at the
+                        entrace of the event.
+                    </p>
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+   
+    <script>
+        function handleRegisterClick() {
+            // Show the loading icon
+            var registerBtn = document.getElementById('register-btn');
+            registerBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Loading...';
+    
+            // Disable the button to prevent multiple clicks
+            registerBtn.disabled = true;
+        }
+    </script>
+    {% comment %} <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#registerBtn').click(function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            var $button = $(this);
+            $button.addClass('loading'); // Add the loading class to the button
+            
+            // Perform the AJAX request to execute the function
+            $.ajax({
+                url: $button.find('a').attr('href'),
+                type: 'GET',
+                success: function() {
+                    // Handle success
+                    $button.removeClass('loading'); // Remove the loading class
+                },
+                error: function() {
+                    // Handle error
+                    $button.removeClass('loading'); // Remove the loading class
+                }
+            });
+        });
+    });
+</script> {% endcomment %}
+
+</div> 
+
+
+{%endblock%}

@@ -1,0 +1,95 @@
+{%extends 'home.html' %}
+
+
+{%block makepayment%}
+
+{% load static %}
+<script src="{% static 'js/plugins.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/details.css' %}">
+
+<div class="container-fluid tm-container-content tm-mt-60">
+   
+    <div class="row tm-mb-90">            
+        <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12">
+            <img src="{{event.header_images.url}}" alt="Image" class="img-fluid">
+          
+        </div>
+        <div class="col-xl-6 col-lg-5 col-md-6 col-sm-12">
+            <div class="tm-bg-gray tm-video-details">
+                <div class="row mb-2">
+                    <h3 class="tm-text-gray-dark">Payment Details</h3>
+                </div>
+
+                <div class="d-flex flex-wrap">
+                    <div class="mr-4 mb-2">
+                        <span class="tm-text-gray-dark">Event: </span><span class="tm-text-primary">{{customer.event_name}}</span>
+                    </div>
+
+                </div>
+                <div class="d-flex flex-wrap">
+                    <div class="mr-4 mb-2">
+                        <span class="tm-text-gray-dark">Email: </span><span class="tm-text-primary">{{customer.email}}</span>
+                    </div>
+
+                </div>
+                <div class="mb-2 d-flex flex-wrap">
+                    <div class="mr-4 mb-2">
+                        <span class="tm-text-gray-dark">Phone Number: : </span><span class="tm-text-primary">{{customer.phone}}</span>
+                    </div>
+                </div>
+
+                <div class="test">
+                    <script src="https://js.paystack.co/v1/inline.js"></script> 
+                    <button class="btn btn-primary tm-btn-big" onclick = "payWithPayStack()" id="django-paystack-button">
+                        <span class="span">Pay: N{{customer.amount}}</span>
+                    </button>
+
+                </div>
+                <div class="mt-4">
+
+                    <p>After a successful payment you will receive a confirmation email. Kindly show that at the
+                        entrace of the event.
+                    </p>
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+   
+</div> 
+
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script>
+    function payWithPayStack(){
+        let currency ="NGN";
+        let plan = "";
+        let ref = "{{customer.ref}}"
+        let obj = {
+            key:'{{paystack_public_key}}',
+            email: '{{customer.email}}',
+            amount: '{{customer.amount_value}}',
+            ref: ref,
+            callback: function(response){
+                window.location.href = "{%url 'verify-payment' customer.ref%}";
+            },
+           
+          
+        }
+        if(Boolean(currency)){
+            obj.currency = currency.toUpperCase()
+        }
+        if(Boolean(plan)){
+            obj.plan = plan;
+        }
+        var handler = PaystackPop.setup(obj);
+        handler.openIframe();
+    }
+   
+</script>
+
+
+{%endblock%}

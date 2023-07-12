@@ -1,0 +1,285 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Application</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/user-home.css' %}">
+
+
+    <script src="https://kit.fontawesome.com/3b31762e2b.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    
+
+</head>
+<body>
+    <!-- Page Pre Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+
+    </div> 
+
+    <!-- ..............................  Nav Bar Section .............................-->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{%url 'user_events_page' %}">
+                <i class="fas fa-film mr-2"></i>
+                Event-XYZ
+            </a>
+            <form class="d-flex tm-search-form" method="GET" action="{% url 'search' %}">
+                <input class="form-control tm-search-input" type="search" name="query" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success tm-search-btn" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                onclick="toggleNavbar()">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+
+                    <li class=" dropdown nav-item dropdown hitems1">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Order Events By - <i class="fa fa-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{%url 'order_by_date_decend'%}">Date Desending</a>
+                            <a class="dropdown-item" href="{%url 'order_by_date_accend'%}">Date Accending</a>
+                            <a class="dropdown-item" href="{%url 'free_event_page'%}">Free Events</a>
+                            <a class="dropdown-item" href="{%url 'paid_event_page'%}">Paid Events</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'about_page'%}" class="nav-link">About</a>
+                    </li>
+                           
+
+
+                 <div class="hitems">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-3" href="desending.html">Date Descending</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-3" href="ascending.html">Date Ascending</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-3" href="free.html">Free Events</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-3" href="pais.html">Paid Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-3" href="about.html">About</a>
+                    </li>
+                   
+
+                    {%if not  user.is_superuser %}
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-3" href="{%url 'admin_login' %}">Admin Page</a>
+
+                    </li>
+                    {%else%}
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-4">Hello {{user}}</a>
+                        <a class="nav-link nav-link-4" href="{%url 'admin_events_page' %}">Admin Page</a>
+
+                        <a  class="nav-link nav-link-4" href="{%url 'logout' %}"> Log Out </a>
+                            
+                    </li>
+                    {%endif%}
+                    
+                </div>
+
+                  
+                    {%if not  user.is_superuser %}
+                    <li class=" dropdown nav-item dropdown hitems1">
+                        <a class="nav-link nav-link-4" href="{%url 'admin_login' %}">Admin Page</a>
+
+                        </li>
+                    {%else%}
+                    <li class=" dropdown nav-item dropdown hitems1">
+                        <a class="nav-link nav-link-4">Hello {{user}}</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="nav-link nav-link-4" href="{%url 'admin_events_page' %}">Admin Page</a>
+
+                            <a href="{%url 'logout' %}">
+                                <input type="submit" name="log-out" value="Log Out" class="btn">
+                                </a>
+                        </div>
+                    </li>
+            {%endif%}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags == "error" %}
+        <div class="error">
+            {{ message }}
+        </div>
+    {% else %}
+        <div class="success">{{ message }}</div>
+    {% endif %}
+    {% endfor %}
+{% endif %}
+
+<!-- ........................... Body Content Section.................................-->
+
+<marquee direction = "right"><h5 style="color:black;">Go to the About Page to Know more about this Application</h5></marquee>
+
+
+<!--   ..............Carousel section.............. -->
+    {% block carousel%}
+
+    {% endblock%}
+
+<!--   ..............All Events section.............. -->
+{% block allEvents%}
+
+{% endblock%}
+
+
+<!--   ..............Details section.............. -->
+{% block details%}
+
+{% endblock%}
+
+<!--   ..............Make Payments section.............. -->
+{% block makepayment%}
+
+{% endblock%}
+
+
+<!--   ..............Free Checkout section.............. -->
+{% block freecheckout%}
+
+{% endblock%}
+
+<!--   ..............About section.............. -->
+{% block about%}
+
+{% endblock%}
+
+<!--   ..............Event Accending section.............. -->
+{% block accending%}
+
+{% endblock%}
+
+<!--   ..............Event Descending section.............. -->
+{% block Descending%}
+
+{% endblock%}
+
+<!--   ..............Free Event section.............. -->
+{% block freeEvents%}
+
+{% endblock%}
+
+<!--   ..............Paid Event section.............. -->
+{% block paidEvents%}
+
+{% endblock%}
+
+
+<!--   ..............Search section.............. -->
+{% block search%}
+
+{% endblock%}
+
+<!--  ...............................Footer Section {% endcomment....................... -->
+    <div class="footer" id="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <div class="content">
+                    <div class="footer-left">
+
+                        <h4>Software<span>DevEmma</span></h4>
+
+                        <p class="footer-links">
+                            <a href="#">Home</a>
+                            |
+                            <a href="#">About</a>
+                            |
+                            <a href="#">Contact</a>
+                            |
+                            <a href="#">Blog</a>
+                        </p>
+
+                        <p class="footer-company-name">Copyright © 2021 <strong>EmmaDeveloper</strong> All rights
+                            reserved</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="content">
+                    <div class="footer-center">
+                        <div>
+                            <i class="fa fa-map-marker"></i>
+                            <p><span>Nigeria</span> Lagos</p>
+                        </div>
+
+                        <div>
+                            <i class="fa fa-phone"></i>
+                            <p>+23480-3781-9461</p>
+                        </div>
+                        <div>
+                            <i class="fa fa-envelope"></i>
+                            <p><a href="mailto:eokereke47@gmail.com">eokereke47@gmail.com</a></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="content">
+                    <div class="right">
+
+                        <p class="footer-company-about">
+                            <span>About the company</span>
+                            <strong>Event XYZ</strong> is an Event booking channel where you can find fun Events
+                            all around Nigeria.
+                        </p>
+                        <div class="footer-icons">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+ 
+    <script src="{% static 'js/toggle.js' %} "></script>
+
+</body>

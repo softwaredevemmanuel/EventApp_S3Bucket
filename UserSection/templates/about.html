@@ -1,0 +1,74 @@
+{%extends 'home.html' %}
+
+
+{%block about%}
+
+{% load static %}
+<script src="{% static 'js/plugins.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/details.css' %}">
+
+<div class="container-fluid tm-container-content tm-mt-60">
+    <div class="row mb-4">
+        <h2 class="col-12 tm-text-primary">About This Project</h2>
+    </div>
+    <div class="row tm-mb-90">            
+        <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12">
+         
+            <h4 class="tm-text-primary">Case Study :</h4>
+            Event-XYX is a go-to ticketing platform where admins can create events and such events are available for users to view, reserve a spot and pay.
+            
+            <h5 class="tm-text-primary">Task :</h5>
+            For an MVP, I Built and deployed, this product in Python, Django, HTML, CSS, JQuery, JavaScript :
+            
+            <ol>
+                <li>- It Has an admin Login (use 'admin' & 'admin' as email and password for the admin user)</li>
+                    
+                <li>- Admin can create a new event.</li>
+                <li>- Every event has a name, location & poster image attached to them.</li>
+                <li>- Every event  has an event date and a bookings end date (date when bookings would end)</li>
+                <li>- A New event has a type : either be free or paid.</li>
+                <li>- Free events have no space limits or price attached to them</li>
+                <li>- Paid events have a price and space capacity.</li>
+                <li>- All these are specified before an event is created.</li>
+                <li>- Admin can see ALL EVENTS</li>
+                <li>- Admin can edit each event : Admin can only edit, if the event date has not passed; Admin can change the end date for ticket booking and date of the event. Admin can't change the type. For Paid events, you can increase the space capacity. You can only reduce the space capacity if and if only the number of bookings have not reached the number you are reducing it to. You can cancel an event if and if only NOBODY has booked.</li>
+                <li>- Admin can view each event and see basic insight like how many people have viewed, how many people have booked, for paid events : how much they have made, how many slots are left.</li>
+        
+            </ol>
+        </div>
+        <div class="col-xl-6 col-lg-7 col-md-6 col-sm-12">
+         
+            <h6 class="tm-text-primary"> Frontend </h6>
+
+            <ol>
+                <li>-Has a user landing page where all events are shown</li>
+                <li>- User can filter events by type (paid/free) and can sort by date of event (asc/desc)</li>
+                <li>- User can view an event : See its name, poster image, type (paid or free), event date, how many slots left (paid), how many days left for booking {since there is no login, every view of the event counts on the view analytics for the event}</li>
+                <li>- Canceled events don't show up</li>
+                <li>- A user search for any event using the search form</li>
+                <li>- The events are paginated to render a maximum of 8 events per page and you can NEXT or PREV a page</li>
+                <li>- User can book an event using just email address and name.</li>
+                <li>- For booking, if email already exists for that particular event, it will display an error message</li>
+                <li>- For Paid events, You can check how many people have booked before booking.</li>
+                <li>- For every event, you are allowed to book before booking date is exceeded</li>
+                <li>- A user confirmation email is sent with further details of the event</li>
+
+            </ol>
+            <h5 class="tm-text-primary"> BONUS POINTS 😉:</h5>
+
+            <ol>
+
+                <li>- An Automated Tests for the App was written</li>
+                <li>- A reminder script to send an email to the user 1 week and 1 day to the event.</li>
+                <li>- A payment gateway (paystack) was used  to collect test payment from users</li>
+                <li>- A readme on my codebase detailing my architecture and thought process</li>
+            </ol>
+          
+        </div>
+    </div>
+
+
+  
+</div> 
+
+{%endblock%}
