@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'EventApp_S3Bucket.wsgi.application'
 DATABASES = {
     'default': {
        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': 'event',
         'USER': 'postgres',
         'PASSWORD': 'hannah',
         'HOST': '127.0.0.1',
