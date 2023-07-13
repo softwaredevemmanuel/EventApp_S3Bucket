@@ -1,11 +1,9 @@
 import os
 from pathlib import Path
-from dotenv import load_dotenv
 
-load_dotenv()
 
-PAYSTACK_SECRET_KEY = os.environ['PAYSTACK_SECRET_KEY']
-PAYSTACK_PUBLIC_KEY = os.environ['PAYSTACK_PUBLIC_KEY']
+PAYSTACK_SECRET_KEY = 'sk_test_645277eefa0e9c621e4eaf1b06de642c56dc4375'
+PAYSTACK_PUBLIC_KEY = 'pk_test_7423669631139e962499ac54324490e6ef999137'
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -16,10 +14,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = 'django-insecure--4y70arn&a&duv%az=@3f#=mp9%xvyeh6e&bl*yngs-&n*_f=4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ['DEBUG']
+DEBUG = 'True'
 
 ALLOWED_HOSTS = ['*']
 
@@ -134,7 +132,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Email sending
-EMAIL_HOST = os.environ['EMAIL_HOST']
-EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
-EMAIL_PORT = os.environ['EMAIL_PORT']
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = 'c2b55ff16ac136'
+EMAIL_HOST_PASSWORD = 'cab34aa79a337b'
+EMAIL_PORT =2525
