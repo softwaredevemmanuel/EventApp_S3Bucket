@@ -35,6 +35,7 @@ class EventDetailsView(DetailView):
     model = Event
     template_name = "Edetails.html"
     queryset = Event.objects.all()
+    
 
 class Booking(ListView):
     queryset = Customer.objects.all()
@@ -115,7 +116,7 @@ def register_free(request,pk):
             phone = request.POST["phone"]
             event_id=poll.id
             event_name = poll.event_name
-            # event_date = poll.event_date
+            event_date = poll.event_date
 
             b = Customer(
                 email=email,
@@ -123,7 +124,7 @@ def register_free(request,pk):
                 event_id = event_id,
                 verified = False,
                 event_name = event_name,
-                # event_date = event_date
+                event_date = event_date
             )
 
             if Customer.objects.filter(email=email, event_id=event_id, verified=True).exists():  
@@ -137,10 +138,17 @@ def register_free(request,pk):
                 return render(request, 'make_payment.html', {'customer':b, 'event': poll, 'paystack_public_key':settings.PAYSTACK_PUBLIC_KEY})
 
             else:
-                poll.bookings += 1
+                print(".........................................................................")
+                # poll.bookings += 1
+                print("22222222222222222222222222222222222222222222222222222222222222222")
+
 
                 b.save()
+                print("section 3")
+
                 poll.save()
+                print("section 4")
+
                 return render(request, 'freeCheckout.html', {'customer':b, 'event': poll, 'paystack_public_key':settings.PAYSTACK_PUBLIC_KEY})
 
         
@@ -196,6 +204,7 @@ def register(request,pk):
                 #send_mail(subject, message, message_from,[email])
                 poll.bookings += 1
                 poll.slot_left = poll.space_capacity - poll.bookings
+
                 b.save()
                 poll.save()
                 # print(Customer.objects.filter().get(pk=pk))

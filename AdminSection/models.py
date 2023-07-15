@@ -68,14 +68,14 @@ class Event(models.Model):
 
 class Customer(models.Model):
     email = models.CharField(max_length=100)
-    phone = models.IntegerField()
+    phone = models.BigIntegerField()
     event_id = models.CharField(max_length=100)
     ref = models.CharField(max_length=200,  null=True,)
     verified = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now=True)
     amount = models.PositiveIntegerField(null=True, blank=True)
     event_name = models.CharField(max_length=100)
-    event_date = models.DateTimeField(null=True, blank=True)
+    event_date = models.DateField(null=True, blank=True)
 
 
     def __str__(self):
