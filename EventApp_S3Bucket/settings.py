@@ -19,7 +19,7 @@ SECRET_KEY = 'django-insecure--4y70arn&a&duv%az=@3f#=mp9%xvyeh6e&bl*yngs-&n*_f=4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'False'
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
 
 
 # Application definition
@@ -65,23 +65,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'EventApp_S3Bucket.wsgi.application'
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
 # DATABASES = {
-#     'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'event',
-#         'USER': 'postgres',
-#         'PASSWORD': 'hannah',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
 #     }
 # }
+
+DATABASES = {
+    'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': '0g4lYudRB6G0Ei1Ze5QD',
+        'HOST': 'containers-us-west-119.railway.app',
+        'PORT': '6102',
+    }
+}
 
 
 # Password validation
