@@ -115,7 +115,7 @@ def register_free(request,pk):
             phone = request.POST["phone"]
             event_id=poll.id
             event_name = poll.event_name
-            event_date = poll.event_date
+            # event_date = poll.event_date
 
             b = Customer(
                 email=email,
@@ -123,7 +123,7 @@ def register_free(request,pk):
                 event_id = event_id,
                 verified = False,
                 event_name = event_name,
-                event_date = event_date
+                # event_date = event_date
             )
 
             if Customer.objects.filter(email=email, event_id=event_id, verified=True).exists():  
