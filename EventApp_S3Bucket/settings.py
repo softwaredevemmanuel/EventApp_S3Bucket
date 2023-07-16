@@ -32,7 +32,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'AdminSection',
-    'UserSection'
+    'UserSection',
+    'storages'
+
 ]
 
 MIDDLEWARE = [
@@ -136,3 +138,15 @@ EMAIL_HOST = 'smtp.mailtrap.io'
 EMAIL_HOST_USER = 'c2b55ff16ac136'
 EMAIL_HOST_PASSWORD = 'cab34aa79a337b'
 EMAIL_PORT =2525
+
+
+AWS_ACCESS_KEY_ID = "AKIAXODDT3XOV7NTTGUM"
+AWS_SECRET_ACCESS_KEY = "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"
+
+
+
+AWS_STORAGE_BUCKET_NAME = "eventappbucket"
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_REGION_NAME = 'us-east-2'

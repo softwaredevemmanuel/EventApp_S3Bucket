@@ -1,9 +1,0 @@
-.input::placeholder {
-    color: rgba(0, 0, 0, 0.5); /* Faint color for the placeholder text */
-    text-align: center; /* Center the placeholder text */
-    border: none;
-  }
-  .input:focus {
-    outline: none;
-    box-shadow: none;
-  }
