@@ -40,10 +40,12 @@
 
                 <div class="test">
                     <script src="https://js.paystack.co/v1/inline.js"></script> 
-                    <button class="btn btn-primary tm-btn-big" onclick = "payWithPayStack()" id="django-paystack-button">
+                    <button class="btn btn-primary tm-btn-big" onclick="payWithPayStack()" id="django-paystack-button">
                         <span class="span">Pay: N{{customer.amount}}</span>
                     </button>
-
+                    <div id="payment-spinner" style="display: none;">
+                        <i class="fa fa-spinner fa-spin"></i> Processing Payment...
+                    </div>
                 </div>
                 <div class="mt-4">
 
@@ -63,8 +65,16 @@
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
+
 <script>
-    function payWithPayStack(){
+    function payWithPayStack() {
+        var button = document.getElementById('django-paystack-button');
+        var spinner = document.getElementById('payment-spinner');
+        
+        button.disabled = true; // Disable the button
+        button.style.display = 'none'; // Hide the button
+        spinner.style.display = 'block'; // Show the spinner
+        
         let currency ="NGN";
         let plan = "";
         let ref = "{{customer.ref}}"
@@ -76,7 +86,6 @@
             callback: function(response){
                 window.location.href = "{%url 'verify-payment' customer.ref%}";
             },
-           
           
         }
         if(Boolean(currency)){
@@ -87,9 +96,17 @@
         }
         var handler = PaystackPop.setup(obj);
         handler.openIframe();
+        
+        // Revert the button and spinner states after payment processing
+        setTimeout(function() {
+            button.disabled = false;
+            button.style.display = 'block';
+            spinner.style.display = 'none';
+        }, 20000); // Delay in milliseconds (adjust as needed)
     }
-   
 </script>
+
+
 
 
 {%endblock%}

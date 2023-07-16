@@ -138,17 +138,9 @@ def register_free(request,pk):
                 return render(request, 'make_payment.html', {'customer':b, 'event': poll, 'paystack_public_key':settings.PAYSTACK_PUBLIC_KEY})
 
             else:
-                print(".........................................................................")
-                # poll.bookings += 1
-                print("22222222222222222222222222222222222222222222222222222222222222222")
-
-
+                poll.bookings += 1
                 b.save()
-                print("section 3")
-
                 poll.save()
-                print("section 4")
-
                 return render(request, 'freeCheckout.html', {'customer':b, 'event': poll, 'paystack_public_key':settings.PAYSTACK_PUBLIC_KEY})
 
         

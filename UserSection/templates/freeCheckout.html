@@ -72,31 +72,6 @@
             registerBtn.disabled = true;
         }
     </script>
-    {% comment %} <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#registerBtn').click(function(event) {
-            event.preventDefault(); // Prevent the default form submission
-            var $button = $(this);
-            $button.addClass('loading'); // Add the loading class to the button
-            
-            // Perform the AJAX request to execute the function
-            $.ajax({
-                url: $button.find('a').attr('href'),
-                type: 'GET',
-                success: function() {
-                    // Handle success
-                    $button.removeClass('loading'); // Remove the loading class
-                },
-                error: function() {
-                    // Handle error
-                    $button.removeClass('loading'); // Remove the loading class
-                }
-            });
-        });
-    });
-</script> {% endcomment %}
-
 </div> 
 
 
