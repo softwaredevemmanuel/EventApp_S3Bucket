@@ -1,9 +1,12 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
-PAYSTACK_SECRET_KEY = 'sk_test_645277eefa0e9c621e4eaf1b06de642c56dc4375'
-PAYSTACK_PUBLIC_KEY = 'pk_test_7423669631139e962499ac54324490e6ef999137'
+PAYSTACK_SECRET_KEY = os.environ.get('PAYSTACK_SECRET_KEY')
+PAYSTACK_PUBLIC_KEY = os.environ.get('PAYSTACK_PUBLIC_KEY')
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -14,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--4y70arn&a&duv%az=@3f#=mp9%xvyeh6e&bl*yngs-&n*_f=4'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'False'
@@ -140,8 +143,8 @@ EMAIL_HOST_PASSWORD = 'cab34aa79a337b'
 EMAIL_PORT =2525
 
 
-AWS_ACCESS_KEY_ID = "AKIAXODDT3XOV7NTTGUM"
-AWS_SECRET_ACCESS_KEY = "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"
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
 
 
