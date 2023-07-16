@@ -3,17 +3,9 @@
       "src": "EventApp_S3Bucket/wsgi.py",
       "use": "@vercel/python",
       "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
-  },
-  {
-      "src": "build.sh",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "staticfiles_build" }
-  }],
+  }
+],
   "routes": [
-      {
-          "src": "/static/(.*)",
-          "dest": "/static/$1"
-      },
       {
           "src": "/(.*)",
           "dest": "EventApp_S3Bucket/wsgi.py"
