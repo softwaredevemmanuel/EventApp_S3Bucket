@@ -27,10 +27,6 @@ class BookView(ListView):
     model = Customer
     template_name = "BookingDetails.html"
 
-class BookView(ListView):
-    model = Customer
-    template_name = "EventDetails2.html"
-
 class EventDetailsView(DetailView):
     model = Event
     template_name = "Edetails.html"
